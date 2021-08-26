@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.Build.NoTargets">
+
+  <PropertyGroup>
+    <PackageId>TestDotnetPackSinglePackage</PackageId>
+    <Authors>Varian Medical Systems, Inc.</Authors>
+    <Description>Department TMS package for standalone k8s cluster deployment.</Description>
+    <Copyright>Copyright © Varian Medical Systems, Inc.</Copyright>
+    <PackageTags>DepTMS</PackageTags>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <!-- TargetFramework property is required, even though is irrelevant for this package -->
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <!-- NU5110: The script file is outside the 'tools' folder and hence will not be executed during installation of this package. -->
+    <!-- NU5111: The script file is not recognized by NuGet and hence will not be executed during installation of this package. -->
+    <!-- NU5119: File '.gitignore' was not added to the package. Files and folders starting with '.' or ending with '.nupkg' are excluded by default. -->
+    <!-- NU5123: path, name, or both are too long. Your package might not work without long file path support. Please shorten the file path or file name. -->
+    <!-- NU5128: Some target frameworks declared in the dependencies group of the nuspec and the lib/ref folder do not have exact matches in the other location. -->
+    <NoWarn>$(NoWarn);NU5110;NU5111;NU5119;NU5123;NU5128;</NoWarn>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Content Include="..\_bin\netcoreapp3.1\TestDotnetPackSinglePackage.dll">
+      <PackagePath>lib\netcoreapp3.1\</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="..\_bin\netcoreapp3.1\TestDotnetPackSinglePackage.Common.dll">
+      <PackagePath>lib\netcoreapp3.1\</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="..\_bin\net472\TestDotnetPackSinglePackage.dll">
+      <PackagePath>lib\net472\</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="..\_bin\net472\TestDotnetPackSinglePackage.Common.dll">
+      <PackagePath>lib\net472\</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TestDotnetPackSinglePackage\TestDotnetPackSinglePackage.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>
